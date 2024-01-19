@@ -1,26 +1,32 @@
-<?xml version="1.0"?>
-<package format="3">
-  <name>phasespace_msgs</name>
-  <version>0.0.0</version>
-  <description>Example package for custom interfaces</description>
+cmake_minimum_required(VERSION 3.5)
+project(phasespace_msgs)
 
-  <maintainer email="your_email@example.com">Your Name</maintainer>
-  <license>Apache-2.0</license> <!-- Update with your package's license -->
+# Default to C++14
+if(NOT CMAKE_CXX_STANDARD)
+  set(CMAKE_CXX_STANDARD 14)
+endif()
 
-  <buildtool_depend>ament_cmake</buildtool_depend> 
-  <buildtool_depend>rosidl_default_generators</buildtool_depend>
-  <depend>rclcpp</depend>
-  <depend>std_msgs</depend>
+# Find dependencies
+find_package(ament_cmake REQUIRED)
+find_package(std_msgs REQUIRED)
+find_package(rosidl_default_generators REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(builtin_interfaces REQUIRED)
 
-  <depend>geometry_msgs</depend>  -->
-  <build_depend>builtin_interfaces</build_depend>
-  <build_depend>rosidl_default_generators</build_depend>
-  <exec_depend>builtin_interfaces</exec_depend>
-  <exec_depend>rosidl_default_runtime</exec_depend>
-  <member_of_group>rosidl_interface_packages</member_of_group>
 
-  <export>
-    <!-- Other export tags can go here -->
-     <build_type>ament_cmake</build_type>
-  </export>
-</package>
+# Declare ROS messages
+rosidl_generate_interfaces(${PROJECT_NAME}
+  "msg/Camera.msg"
+  "msg/Cameras.msg"
+  "msg/Marker.msg"
+  "msg/Markers.msg"
+  "msg/Rigid.msg"
+  "msg/Rigids.msg"
+  DEPENDENCIES std_msgs geometry_msgs builtin_interfaces
+)
+
+# Export dependencies
+ament_export_dependencies(rosidl_default_runtime std_msgs geometry_msgs builtin_interfaces)
+
+
+ament_package()
