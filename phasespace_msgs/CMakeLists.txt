@@ -1,58 +1,32 @@
-################################################################################
-# Set minimum required version of cmake, project name and compile options
-################################################################################
-cmake_minimum_required(VERSION 3.0.2)
+cmake_minimum_required(VERSION 3.5)
 project(phasespace_msgs)
 
-################################################################################
-# Find catkin packages and libraries for catkin and system dependencies
-################################################################################
-find_package(catkin REQUIRED COMPONENTS
-  std_msgs
-  message_generation
+# Default to C++14
+if(NOT CMAKE_CXX_STANDARD)
+  set(CMAKE_CXX_STANDARD 14)
+endif()
+
+# Find dependencies
+find_package(ament_cmake REQUIRED)
+find_package(std_msgs REQUIRED)
+find_package(rosidl_default_generators REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(builtin_interfaces REQUIRED)
+
+
+# Declare ROS messages
+rosidl_generate_interfaces(${PROJECT_NAME}
+  "msg/Camera.msg"
+  "msg/Cameras.msg"
+  "msg/Marker.msg"
+  "msg/Markers.msg"
+  "msg/Rigid.msg"
+  "msg/Rigids.msg"
+  DEPENDENCIES std_msgs geometry_msgs builtin_interfaces
 )
 
-################################################################################
-# Setup for python modules and scripts
-################################################################################
+# Export dependencies
+ament_export_dependencies(rosidl_default_runtime std_msgs geometry_msgs builtin_interfaces)
 
-################################################################################
-# Declare ROS messages, services and actions
-################################################################################
-add_message_files(
-  FILES
-  Camera.msg
-  Cameras.msg
-  Marker.msg
-  Markers.msg
-  Rigid.msg
-  Rigids.msg
-)
 
-generate_messages(
-  DEPENDENCIES
-  std_msgs
-)
-
-################################################################################
-# Declare ROS dynamic reconfigure parameters
-################################################################################
-
-################################################################################
-# Declare catkin specific configuration to be passed to dependent projects
-################################################################################
-catkin_package(
-  CATKIN_DEPENDS std_msgs message_runtime
-)
-
-################################################################################
-# Build
-################################################################################
-
-################################################################################
-# Install
-################################################################################
-
-################################################################################
-# Test
-################################################################################
+ament_package()
