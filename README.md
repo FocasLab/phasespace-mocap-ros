@@ -4,7 +4,7 @@
 1. Clone the repository in your catkin workspace
 ```
 cd ~/catkin_ws/src/
-git clone https://github.com/jayBhagiya/phasespace-mocap-ros.git
+git clone https://github.com/FocasLab/phasespace-mocap-ros.git
 ```
 2. Build the packages
 ```
