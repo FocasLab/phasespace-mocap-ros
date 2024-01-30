@@ -18,7 +18,7 @@ find_package(phasespace_msgs REQUIRED)
 # Include directories
 include_directories(
   include
-  ${CMAKE_CURRENT_SOURCE_DIR}/../../install/phasespace_msgs/include
+#  ${CMAKE_CURRENT_SOURCE_DIR}/../../install/phasespace_msgs/include
 )
 
 # Linking directories, adjust if necessary
@@ -28,7 +28,7 @@ link_directories(lib)
 
 
 # Explicitly set the path to the shared library
-set(LIBOWL_PATH "${CMAKE_CURRENT_SOURCE_DIR}/lib/libowlsock.so")
+set(LIBOWL_PATH "${CMAKE_CURRENT_SOURCE_DIR}/bin/libowlsock.so")
 
 # Adding owlsock library
 add_library(owlsock SHARED IMPORTED)
@@ -46,9 +46,9 @@ target_link_libraries(phasespace_bringup_node owlsock)
 set_target_properties(phasespace_bringup_node PROPERTIES
   INSTALL_RPATH "$ORIGIN/../lib"
 )
-set_target_properties(phasespace_bringup_node PROPERTIES
-  INSTALL_RPATH "$ORIGIN/../lib"
-)
+#set_target_properties(phasespace_bringup_node PROPERTIES
+#  INSTALL_RPATH "$ORIGIN/../lib"
+#)
 
 
 

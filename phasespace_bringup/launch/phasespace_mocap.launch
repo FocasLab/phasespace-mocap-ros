@@ -3,7 +3,7 @@
     <arg name="server_ip" default="192.168.1.230" />
     <arg name="display" default="true" />
     <node name="phasespace_bringup" pkg="phasespace_bringup" type="phasespace_bringup_node" output="screen">
-        <param name="server_ip" type="str" value="$(arg server_ip)"/>
+        <param name="server_ip" type="string" value="$(arg server_ip)"/>
     </node>
     <node if="$(arg display)" pkg="rviz" type="rviz" output="log" name="rviz" args="-d $(find phasespace_bringup)/rviz/vis.rviz" />
     <node name="phasespace_tf_visualization" pkg="phasespace_bringup" type="phasespace_tf_visualization" output="screen" />
